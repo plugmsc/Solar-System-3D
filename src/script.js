@@ -96,8 +96,7 @@ scene.background = cubeTextureLoader.load([
 
 // ******  CONTROLS  ******
 const gui = new dat.GUI({ autoPlace: false });
-const customContainer = document.getElementById('gui-container');
-customContainer.appendChild(gui.domElement);
+gui.hide();
 
 // ****** SETTINGS FOR INTERACTIVE CONTROLS  ******
 const settings = {
@@ -200,7 +199,7 @@ function showPlanetInfo(planet) {
   var details = document.getElementById('planetDetails');
 
   name.innerText = planet;
-  details.innerText = `Radius: ${planetData[planet].radius}\nTilt: ${planetData[planet].tilt}\nRotation: ${planetData[planet].rotation}\nOrbit: ${planetData[planet].orbit}\nDistance: ${planetData[planet].distance}\nMoons: ${planetData[planet].moons}\nInfo: ${planetData[planet].info}`;
+  details.innerText = `Радиус: ${planetData[planet].radius}\nНаклон: ${planetData[planet].tilt}\nВращение: ${planetData[planet].rotation}\nОрбита: ${planetData[planet].orbit}\nДистанция: ${planetData[planet].distance}\nСпутники: ${planetData[planet].moons}\nИнфо: ${planetData[planet].info}`;
 
   info.style.display = 'block';
 }
@@ -492,10 +491,10 @@ const jupiterMoons = [
 ];
 
 // ******  PLANET CREATIONS  ******
-const mercury = new createPlanet('Mercury', 2.4, 40, 0, mercuryTexture, mercuryBump);
-const venus = new createPlanet('Venus', 6.1, 65, 3, venusTexture, venusBump, null, venusAtmosphere);
-const earth = new createPlanet('Earth', 6.4, 90, 23, earthMaterial, null, null, earthAtmosphere, earthMoon);
-const mars = new createPlanet('Mars', 3.4, 115, 25, marsTexture, marsBump)
+const mercury = new createPlanet('Меркурий', 2.4, 40, 0, mercuryTexture, mercuryBump);
+const venus = new createPlanet('Венера', 6.1, 65, 3, venusTexture, venusBump, null, venusAtmosphere);
+const earth = new createPlanet('Земля', 6.4, 90, 23, earthMaterial, null, null, earthAtmosphere, earthMoon);
+const mars = new createPlanet('Марс', 3.4, 115, 25, marsTexture, marsBump)
 // Load Mars moons
 marsMoons.forEach(moon => {
   loadObject(moon.modelPath, moon.position, moon.scale, function(loadedModel) {
@@ -510,102 +509,102 @@ marsMoons.forEach(moon => {
   });
 });
 
-const jupiter = new createPlanet('Jupiter', 69/4, 200, 3, jupiterTexture, null, null, null, jupiterMoons);
-const saturn = new createPlanet('Saturn', 58/4, 270, 26, saturnTexture, null, {
+const jupiter = new createPlanet('Юпитер', 69/4, 200, 3, jupiterTexture, null, null, null, jupiterMoons);
+const saturn = new createPlanet('Сатурн', 58/4, 270, 26, saturnTexture, null, {
   innerRadius: 18, 
   outerRadius: 29, 
   texture: satRingTexture
 });
-const uranus = new createPlanet('Uranus', 25/4, 320, 82, uranusTexture, null, {
+const uranus = new createPlanet('Уран', 25/4, 320, 82, uranusTexture, null, {
   innerRadius: 6, 
   outerRadius: 8, 
   texture: uraRingTexture
 });
-const neptune = new createPlanet('Neptune', 24/4, 340, 28, neptuneTexture);
-const pluto = new createPlanet('Pluto', 1, 350, 57, plutoTexture)
+const neptune = new createPlanet('Нептун', 24/4, 340, 28, neptuneTexture);
+const pluto = new createPlanet('Плутон', 1, 350, 57, plutoTexture)
 
   // ******  PLANETS DATA  ******
   const planetData = {
-    'Mercury': {
-        radius: '2,439.7 km',
+    'Меркурий': {
+        radius: '2,439.7 км',
         tilt: '0.034°',
-        rotation: '58.6 Earth days',
-        orbit: '88 Earth days',
-        distance: '57.9 million km',
+        rotation: '58.6 земных суток',
+        orbit: '88 земных суток',
+        distance: '57.9 млн км',
         moons: '0',
-        info: 'The smallest planet in our solar system and nearest to the Sun.'
+        info: 'Самая маленькая планета в нашей солнечной системе и ближайшая к Солнцу.'
     },
-    'Venus': {
-        radius: '6,051.8 km',
+    'Венера': {
+        radius: '6,051.8 км',
         tilt: '177.4°',
-        rotation: '243 Earth days',
-        orbit: '225 Earth days',
-        distance: '108.2 million km',
+        rotation: '243 земных суток',
+        orbit: '225 земных суток',
+        distance: '108.2 млн км',
         moons: '0',
-        info: 'Second planet from the Sun, known for its extreme temperatures and thick atmosphere.'
+        info: 'Вторая планета от Солнца, известная своими экстремальными температурами и плотной атмосферой.'
     },
-    'Earth': {
-        radius: '6,371 km',
+    'Земля': {
+        radius: '6,371 км',
         tilt: '23.5°',
-        rotation: '24 hours',
-        orbit: '365 days',
-        distance: '150 million km',
-        moons: '1 (Moon)',
-        info: 'Third planet from the Sun and the only known planet to harbor life.'
+        rotation: '24 часа',
+        orbit: '365 дней',
+        distance: '150 млн км',
+        moons: '1 (Луна)',
+        info: 'Третья планета от Солнца и единственная известная планета, на которой есть жизнь.'
     },
-    'Mars': {
-        radius: '3,389.5 km',
+    'Марс': {
+        radius: '3,389.5 км',
         tilt: '25.19°',
-        rotation: '1.03 Earth days',
-        orbit: '687 Earth days',
-        distance: '227.9 million km',
-        moons: '2 (Phobos and Deimos)',
-        info: 'Known as the Red Planet, famous for its reddish appearance and potential for human colonization.'
+        rotation: '1.03 земных суток',
+        orbit: '687 земных суток',
+        distance: '227.9 млн км',
+        moons: '2 (Фобос и Деймос)',
+        info: 'Известна как Красная планета благодаря своему рыжеватому оттенку и потенциалу для колонизации.'
     },
-    'Jupiter': {
-        radius: '69,911 km',
+    'Юпитер': {
+        radius: '69,911 км',
         tilt: '3.13°',
-        rotation: '9.9 hours',
-        orbit: '12 Earth years',
-        distance: '778.5 million km',
-        moons: '95 known moons (Ganymede, Callisto, Europa, Io are the 4 largest)',
-        info: 'The largest planet in our solar system, known for its Great Red Spot.'
+        rotation: '9.9 часов',
+        orbit: '12 земных лет',
+        distance: '778.5 млн км',
+        moons: '95 известных спутников (Ганимед, Каллисто, Европа, Ио — крупнейшие)',
+        info: 'Самая большая планета в нашей солнечной системе, знаменитая своим Большим красным пятном.'
     },
-    'Saturn': {
-        radius: '58,232 km',
+    'Сатурн': {
+        radius: '58,232 км',
         tilt: '26.73°',
-        rotation: '10.7 hours',
-        orbit: '29.5 Earth years',
-        distance: '1.4 billion km',
-        moons: '146 known moons',
-        info: 'Distinguished by its extensive ring system, the second-largest planet in our solar system.'
+        rotation: '10.7 часов',
+        orbit: '29.5 земных лет',
+        distance: '1.4 млрд км',
+        moons: '146 известных спутников',
+        info: 'Выделяется своей обширной системой колец, вторая по размеру планета системы.'
     },
-    'Uranus': {
-        radius: '25,362 km',
+    'Уран': {
+        radius: '25,362 км',
         tilt: '97.77°',
-        rotation: '17.2 hours',
-        orbit: '84 Earth years',
-        distance: '2.9 billion km',
-        moons: '27 known moons',
-        info: 'Known for its unique sideways rotation and pale blue color.'
+        rotation: '17.2 часов',
+        orbit: '84 земных года',
+        distance: '2.9 млрд км',
+        moons: '27 известных спутников',
+        info: 'Известен своим уникальным «боковым» вращением и бледно-голубым цветом.'
     },
-    'Neptune': {
-        radius: '24,622 km',
+    'Нептун': {
+        radius: '24,622 км',
         tilt: '28.32°',
-        rotation: '16.1 hours',
-        orbit: '165 Earth years',
-        distance: '4.5 billion km',
-        moons: '14 known moons',
-        info: 'The most distant planet from the Sun in our solar system, known for its deep blue color.'
+        rotation: '16.1 часов',
+        orbit: '165 земных лет',
+        distance: '4.5 млрд км',
+        moons: '14 известных спутников',
+        info: 'Самая далекая планета от Солнца, известная своим глубоким синим цветом.'
     },
-    'Pluto': {
-        radius: '1,188.3 km',
+    'Плутон': {
+        radius: '1,188.3 км',
         tilt: '122.53°',
-        rotation: '6.4 Earth days',
-        orbit: '248 Earth years',
-        distance: '5.9 billion km',
-        moons: '5 (Charon, Styx, Nix, Kerberos, Hydra)',
-        info: 'Originally classified as the ninth planet, Pluto is now considered a dwarf planet.'
+        rotation: '6.4 земных суток',
+        orbit: '248 земных лет',
+        distance: '5.9 млрд км',
+        moons: '5 (Харон, Стикс, Никта, Кербер, Гидра)',
+        info: 'Ранее считался девятой планетой, теперь классифицируется как карликовая планета.'
     }
 };
 
