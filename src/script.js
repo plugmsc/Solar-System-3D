@@ -36,6 +36,8 @@ import uraRingTexture from '/images/uranus_ring.png';
 import neptuneTexture from '/images/neptune.jpg';
 import plutoTexture from '/images/plutomap.jpg';
 
+let isAppPaused = false;
+
 // ******  SETUP  ******
 console.log("Create the scene");
 const scene = new THREE.Scene();
@@ -657,7 +659,11 @@ pluto.planet.receiveShadow = true;
 
 
 
-function animate(){
+function animate() {
+  if (isAppPaused) {
+    requestAnimationFrame(animate);
+    return;
+  }
 
   //rotating planets around the sun and itself
   sun.rotateY(0.001 * settings.acceleration);
@@ -830,6 +836,13 @@ function selectPlanetProgrammatically(planetObj, planetName) {
 }
 
 window.addEventListener('message', (event) => {
+  if (event.data === 'pauseApp') {
+        isAppPaused = true;
+        console.log("Simulation paused to save your shitty GPU");
+    } else if (event.data === 'resumeApp') {
+        isAppPaused = false;
+        console.log("Simulation resumed");
+    }
     if (event.data === 'switchTo2D') {
         setViewMode('2d');
     } else if (event.data === 'switchTo3D') {
