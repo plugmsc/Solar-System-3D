@@ -788,4 +788,29 @@ window.addEventListener('resize', function(){
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth,window.innerHeight);
   composer.setSize(window.innerWidth,window.innerHeight);
+  
+// Функция переключения режима 2D/3D
+function setViewMode(mode) {
+    if (mode === '2d') {
+        // Фиксируем камеру сверху
+        camera.position.set(0, 450, 0);
+        controls.enableRotate = false; // Запрещаем вращать, чтобы не сломать 2D
+        controls.target.set(0, 0, 0);
+        settings.accelerationOrbit = 0.2; // Замедляем, чтобы в 2D не мельтешило
+    } else {
+        // Возвращаем в 3D
+        camera.position.set(-175, 115, 5);
+        controls.enableRotate = true;
+        settings.accelerationOrbit = 1;
+    }
+    controls.update();
+}
+
+// Слушаем сообщения от родительской страницы (Тильды)
+window.addEventListener('message', (event) => {
+    if (event.data === 'switchTo2D') {
+        setViewMode('2d');
+    } else if (event.data === 'switchTo3D') {
+        setViewMode('3d');
+    }
 });
