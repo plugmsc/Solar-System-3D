@@ -28,10 +28,12 @@ canvas {
 .planet-info {
     display: none;
     position: fixed;
-    left: 1.25rem;
-    top: 1.25rem;
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
     width: 20rem;
     z-index: 100;
+    pointer-events: all;
 }
 
 .planet-info-content {
