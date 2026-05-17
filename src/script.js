@@ -804,10 +804,33 @@ function setViewMode(mode) {
     controls.update();
 }
 
+function selectPlanetProgrammatically(planetObj, planetName) {
+    if (!planetObj) return;
+    
+    closeInfoNoZoomOut();
+    selectedPlanet = planetObj;
+    
+    offset = 25; 
+    settings.accelerationOrbit = 0; 
+
+    const planetPosition = new THREE.Vector3();
+    selectedPlanet.planet.getWorldPosition(planetPosition);
+    
+    controls.target.copy(planetPosition);
+    camera.lookAt(planetPosition);
+
+    targetCameraPosition.copy(planetPosition).add(
+        camera.position.clone().sub(planetPosition).normalize().multiplyScalar(offset)
+    );
+    isMovingTowardsPlanet = true;
+}
+
 window.addEventListener('message', (event) => {
     if (event.data === 'switchTo2D') {
         setViewMode('2d');
     } else if (event.data === 'switchTo3D') {
         setViewMode('3d');
+    } else if (event.data === 'selectEarth') {
+        selectPlanetProgrammatically(earth, 'Земля');
     }
 });
