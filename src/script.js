@@ -791,8 +791,12 @@ window.addEventListener('resize', function(){
 });
 
 function setViewMode(mode) {
+    isMovingTowardsPlanet = false;
+    isZoomingOut = false;
+
     if (mode === '2d') {
         camera.position.set(0, 450, 0);
+        camera.lookAt(0, 0, 0);
         controls.enableRotate = false;
         controls.target.set(0, 0, 0);
         settings.accelerationOrbit = 0.2;
